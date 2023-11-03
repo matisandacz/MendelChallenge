@@ -66,7 +66,7 @@ public class TransactionService {
     return transactionSum;
   }
 
-  private Transaction getTransactionOrThrow(Long transactionId, String errorMessage) {
+  protected Transaction getTransactionOrThrow(Long transactionId, String errorMessage) {
     Transaction transaction = transactions.get(transactionId);
     if (transaction == null) {
       throw new NoSuchElementException(errorMessage);
