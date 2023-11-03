@@ -22,17 +22,18 @@ public class TransactionService {
 
   public void saveTransaction(Transaction transaction) {
 
+    Transaction parentTransaction;
+    if (transaction.getParentId() != null) {
+      parentTransaction =
+          getTransactionOrThrow(
+              transaction.getParentId(),
+              String.format("Parent transaction with id %d not found", transaction.getParentId()));
+      // If this transaction is related to a parent, add it as a child.
+      parentTransaction.getChildrenTransactions().add(transaction);
+    }
+
     // Save the transaction
     transactions.put(transaction.getTransactionId(), transaction);
-
-    if (transaction.getParentId() == null) return;
-
-    // If this transaction is related to a parent, add it as a child.
-    Transaction parentTransaction =
-        getTransactionOrThrow(
-            transaction.getParentId(),
-            String.format("Parent transaction with id %d not found", transaction.getParentId()));
-    parentTransaction.getChildrenTransactions().add(transaction);
   }
 
   public List<Long> getTransactionsByType(String type) {
