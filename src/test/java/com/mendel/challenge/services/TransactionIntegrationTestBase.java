@@ -23,7 +23,7 @@ public class TransactionIntegrationTestBase {
 
   protected static final String CREATE_TRANSACTION_URL = "/transactions/";
   protected static final String GET_TRANSACTIONS_BY_TYPE_URL = "/transactions/types/";
-  protected static final String SAVE_TRANSACTIONS_URL = "/transactions/sum/";
+  protected static final String SUM_TRANSACTIONS_URL = "/transactions/sum/";
 
   protected static final String TRANSACTION_NOT_FOUND_ERROR_MESSAGE = "Transaction not found";
 
@@ -53,6 +53,16 @@ public class TransactionIntegrationTestBase {
     return mockMvc
         .perform(
             MockMvcRequestBuilders.get(GET_TRANSACTIONS_BY_TYPE_URL + type)
+                .contentType(MediaType.APPLICATION_JSON)
+                .accept(MediaType.APPLICATION_JSON))
+        .andReturn();
+  }
+
+  protected MvcResult sumTransactions(Long transactionId) throws Exception {
+    // Save the transaction
+    return mockMvc
+        .perform(
+            MockMvcRequestBuilders.get(SUM_TRANSACTIONS_URL + transactionId)
                 .contentType(MediaType.APPLICATION_JSON)
                 .accept(MediaType.APPLICATION_JSON))
         .andReturn();

@@ -43,14 +43,14 @@ public class TransactionService {
         .collect(Collectors.toList());
   }
 
-  public double sumAllRelatedTransactions(Long transactionId) {
+  public Double sumAllRelatedTransactions(Long transactionId) {
     Transaction transaction =
         getTransactionOrThrow(
             transactionId, String.format("Transaction with id %d not found", transactionId));
     return sumAllRelatedTransactionsRecursively(transaction);
   }
 
-  private double sumAllRelatedTransactionsRecursively(Transaction transaction) {
+  private Double sumAllRelatedTransactionsRecursively(Transaction transaction) {
 
     // Base Case
     if (transaction.getChildrenTransactions().isEmpty()) {
