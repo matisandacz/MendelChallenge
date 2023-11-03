@@ -38,5 +38,5 @@ public class Transaction {
 
   @Nullable private final Long parentId;
 
-  private final List<Transaction> childrenTransactions;
+  @NotNull private final List<Transaction> childrenTransactions;
 }

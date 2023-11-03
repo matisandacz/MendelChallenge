@@ -6,7 +6,6 @@ package com.mendel.challenge.services;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.mendel.challenge.models.TransactionDto;
-import org.junit.jupiter.api.BeforeEach;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -32,9 +31,6 @@ public class TransactionIntegrationTestBase {
   @Autowired protected ObjectMapper objectMapper;
 
   @Autowired protected TransactionService transactionService;
-
-  @BeforeEach
-  void setupBeforeEach() {}
 
   protected MvcResult saveTransactionDto(Long transactionId, TransactionDto transactionDto)
       throws Exception {
