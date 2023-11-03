@@ -5,6 +5,8 @@
 package com.mendel.challenge.domain;
 
 import jakarta.annotation.Nullable;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 import java.util.List;
 import lombok.Builder;
 import lombok.Getter;
@@ -14,8 +16,8 @@ import lombok.Getter;
 public class Transaction {
 
   public Transaction(
-      long transaction_id,
-      double amount,
+      Long transaction_id,
+      Double amount,
       String type,
       @Nullable Long parentId,
       List<Long> childrenIds) {
@@ -26,11 +28,11 @@ public class Transaction {
     this.childrenIds = childrenIds;
   }
 
-  private final long transaction_id;
+  @NotNull private final Long transaction_id;
 
-  private final double amount;
+  @NotNull private final Double amount;
 
-  private final String type;
+  @NotEmpty private final String type;
 
   @Nullable private final Long parentId;
 

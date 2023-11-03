@@ -17,7 +17,7 @@ public class TransactionService {
     return List.of(1L, 2L, 3L);
   }
 
-  public double sumAllTransitiveTransactions(long transaction_id) {
+  public double sumAllRelatedTransactions(Long transaction_id) {
     return 123.0;
   }
 }
