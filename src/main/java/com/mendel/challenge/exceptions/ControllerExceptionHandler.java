@@ -28,22 +28,21 @@ public class ControllerExceptionHandler {
               errorMap.put(error.getField(), error.getDefaultMessage());
             });
 
-    HttpStatus status = HttpStatus.BAD_REQUEST;
-    ErrorInfo message = new ErrorInfo(errorMap.toString(), status.value());
-    return new ResponseEntity<>(message, status);
+    return createErrorResponse(errorMap.toString(), HttpStatus.BAD_REQUEST);
   }
 
   @ExceptionHandler(value = {NoSuchElementException.class})
   public ResponseEntity<ErrorInfo> elementNotFoundHandler(Exception ex) {
-    HttpStatus status = HttpStatus.NOT_FOUND;
-    ErrorInfo message = new ErrorInfo(ex.getMessage(), status.value());
-    return new ResponseEntity<>(message, status);
+    return createErrorResponse(ex.getMessage(), HttpStatus.NOT_FOUND);
   }
 
   @ExceptionHandler(value = {Exception.class})
   public ResponseEntity<ErrorInfo> defaultExceptionHandler(Exception ex) {
-    HttpStatus status = HttpStatus.INTERNAL_SERVER_ERROR;
-    ErrorInfo message = new ErrorInfo(ex.getMessage(), status.value());
-    return new ResponseEntity<>(message, status);
+    return createErrorResponse(ex.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+  }
+
+  private ResponseEntity<ErrorInfo> createErrorResponse(String errorMessage, HttpStatus status) {
+    ErrorInfo errorInfo = new ErrorInfo(errorMessage, status.value());
+    return new ResponseEntity<>(errorInfo, status);
   }
 }

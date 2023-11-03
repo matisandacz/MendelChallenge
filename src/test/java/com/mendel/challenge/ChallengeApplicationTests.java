@@ -11,5 +11,5 @@ import org.springframework.boot.test.context.SpringBootTest;
 class ChallengeApplicationTests {
 
   @Test
-  void contextLoads() {}
+  void contextLoads() {} // Sanity check test that will fail if the application context cannot start
 }

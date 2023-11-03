@@ -46,10 +46,10 @@ public class TransactionService {
     Transaction transaction =
         getTransactionOrThrow(
             transactionId, String.format("Transaction with id %d not found", transactionId));
-    return sumAllRelatedTransactionsHelper(transaction);
+    return sumAllRelatedTransactionsRecursively(transaction);
   }
 
-  private double sumAllRelatedTransactionsHelper(Transaction transaction) {
+  private double sumAllRelatedTransactionsRecursively(Transaction transaction) {
 
     // Base Case
     if (transaction.getChildrenTransactions().isEmpty()) {
@@ -60,7 +60,7 @@ public class TransactionService {
 
     // Recursive Case
     for (Transaction t : transaction.getChildrenTransactions()) {
-      transactionSum += sumAllRelatedTransactionsHelper(t);
+      transactionSum += sumAllRelatedTransactionsRecursively(t);
     }
 
     return transactionSum;
