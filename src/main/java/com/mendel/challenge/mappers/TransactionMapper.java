@@ -7,10 +7,10 @@ package com.mendel.challenge.mappers;
 import com.mendel.challenge.domain.Transaction;
 import com.mendel.challenge.models.TransactionDto;
 import java.util.ArrayList;
-import lombok.experimental.UtilityClass;
 
-@UtilityClass
 public class TransactionMapper {
+
+  private TransactionMapper() {}
 
   public static TransactionDto toModel(Transaction transaction) {
     return TransactionDto.builder()

@@ -5,6 +5,8 @@
 package com.mendel.challenge.models;
 
 import jakarta.annotation.Nullable;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.Positive;
 import lombok.Builder;
 import lombok.Getter;
 
@@ -18,8 +20,9 @@ public class TransactionDto {
     this.parentId = parentId;
   }
 
-  private final double amount;
+  @Positive private final double amount;
 
+  @NotEmpty(message = "type can't be blank")
   private final String type;
 
   @Nullable private final Long parentId;

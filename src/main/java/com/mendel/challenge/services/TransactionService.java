@@ -11,7 +11,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class TransactionService {
 
-  public void storeTransaction(Transaction transaction) {}
+  public void saveTransaction(Transaction transaction) {}
 
   public List<Long> getTransactionsByType(String type) {
     return List.of(1L, 2L, 3L);
