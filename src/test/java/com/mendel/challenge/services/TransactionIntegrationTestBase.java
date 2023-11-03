@@ -6,18 +6,19 @@ package com.mendel.challenge.services;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.mendel.challenge.models.TransactionDto;
-import java.util.List;
 import org.junit.jupiter.api.BeforeEach;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
+import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
 @SpringBootTest
 @AutoConfigureMockMvc
+@DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
 public class TransactionIntegrationTestBase {
 
   protected static final String CREATE_TRANSACTION_URL = "/transactions/";
@@ -35,13 +36,6 @@ public class TransactionIntegrationTestBase {
   @BeforeEach
   void setupBeforeEach() {}
 
-  protected void saveTransactionDtos(
-      List<Long> transactionDtoIds, List<TransactionDto> transactionDtoList) throws Exception {
-    for (int idx = 0; idx < transactionDtoList.size(); idx++) {
-      saveTransactionDto(transactionDtoIds.get(idx), transactionDtoList.get(idx));
-    }
-  }
-
   protected MvcResult saveTransactionDto(Long transactionId, TransactionDto transactionDto)
       throws Exception {
     // Save the transaction
@@ -50,6 +44,16 @@ public class TransactionIntegrationTestBase {
             MockMvcRequestBuilders.put(CREATE_TRANSACTION_URL + transactionId)
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(objectMapper.writeValueAsString(transactionDto))
+                .accept(MediaType.APPLICATION_JSON))
+        .andReturn();
+  }
+
+  protected MvcResult getTransactionByType(String type) throws Exception {
+    // Save the transaction
+    return mockMvc
+        .perform(
+            MockMvcRequestBuilders.get(GET_TRANSACTIONS_BY_TYPE_URL + type)
+                .contentType(MediaType.APPLICATION_JSON)
                 .accept(MediaType.APPLICATION_JSON))
         .andReturn();
   }
