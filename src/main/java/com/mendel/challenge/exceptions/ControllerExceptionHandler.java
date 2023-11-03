@@ -6,6 +6,7 @@ package com.mendel.challenge.exceptions;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.NoSuchElementException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MethodArgumentNotValidException;
@@ -29,6 +30,13 @@ public class ControllerExceptionHandler {
 
     HttpStatus status = HttpStatus.BAD_REQUEST;
     ErrorInfo message = new ErrorInfo(errorMap.toString(), status.value());
+    return new ResponseEntity<>(message, status);
+  }
+
+  @ExceptionHandler(value = {NoSuchElementException.class})
+  public ResponseEntity<ErrorInfo> elementNotFoundHandler(Exception ex) {
+    HttpStatus status = HttpStatus.NOT_FOUND;
+    ErrorInfo message = new ErrorInfo(ex.getMessage(), status.value());
     return new ResponseEntity<>(message, status);
   }
 

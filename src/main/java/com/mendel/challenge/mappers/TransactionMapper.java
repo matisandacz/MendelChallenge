@@ -25,7 +25,8 @@ public class TransactionMapper {
         .transaction_id(transaction_id)
         .amount(transactionDto.getAmount())
         .type(transactionDto.getType())
-        .childrenIds(new ArrayList<>())
+        .childrenTransactions(new ArrayList<>())
+        .parentId(transactionDto.getParentId())
         .build();
   }
 }

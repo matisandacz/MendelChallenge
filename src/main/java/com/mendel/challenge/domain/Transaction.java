@@ -20,12 +20,12 @@ public class Transaction {
       Double amount,
       String type,
       @Nullable Long parentId,
-      List<Long> childrenIds) {
+      List<Transaction> childrenTransactions) {
     this.transaction_id = transaction_id;
     this.amount = amount;
     this.type = type;
     this.parentId = parentId;
-    this.childrenIds = childrenIds;
+    this.childrenTransactions = childrenTransactions;
   }
 
   @NotNull private final Long transaction_id;
@@ -36,5 +36,5 @@ public class Transaction {
 
   @Nullable private final Long parentId;
 
-  private final List<Long> childrenIds;
+  private final List<Transaction> childrenTransactions;
 }
