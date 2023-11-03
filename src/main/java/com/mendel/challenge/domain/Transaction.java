@@ -16,19 +16,19 @@ import lombok.Getter;
 public class Transaction {
 
   public Transaction(
-      Long transaction_id,
+      Long transactionId,
       Double amount,
       String type,
       @Nullable Long parentId,
       List<Transaction> childrenTransactions) {
-    this.transaction_id = transaction_id;
+    this.transactionId = transactionId;
     this.amount = amount;
     this.type = type;
     this.parentId = parentId;
     this.childrenTransactions = childrenTransactions;
   }
 
-  @NotNull private final Long transaction_id;
+  @NotNull private final Long transactionId;
 
   @NotNull private final Double amount;
 

@@ -20,9 +20,9 @@ public class TransactionMapper {
         .build();
   }
 
-  public static Transaction toDomain(long transaction_id, TransactionDto transactionDto) {
+  public static Transaction toDomain(long transactionId, TransactionDto transactionDto) {
     return Transaction.builder()
-        .transaction_id(transaction_id)
+        .transactionId(transactionId)
         .amount(transactionDto.getAmount())
         .type(transactionDto.getType())
         .childrenTransactions(new ArrayList<>())

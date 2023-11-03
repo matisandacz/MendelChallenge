@@ -23,36 +23,29 @@ public class TransactionService {
   public void saveTransaction(Transaction transaction) {
 
     // Save the transaction
-    transactions.put(transaction.getTransaction_id(), transaction);
+    transactions.put(transaction.getTransactionId(), transaction);
 
     if (transaction.getParentId() == null) return;
 
     // If this transaction is related to a parent, add it as a child.
-    Transaction parentTransaction = transactions.get(transaction.getParentId());
-
-    if (parentTransaction == null) {
-      throw new NoSuchElementException(
-          String.format("Parent transaction with id %d not found", transaction.getParentId()));
-    }
-
+    Transaction parentTransaction =
+        getTransactionOrThrow(
+            transaction.getParentId(),
+            String.format("Parent transaction with id %d not found", transaction.getParentId()));
     parentTransaction.getChildrenTransactions().add(transaction);
   }
 
   public List<Long> getTransactionsByType(String type) {
     return transactions.values().stream()
         .filter(transaction -> type.equals(transaction.getType()))
-        .map(Transaction::getTransaction_id)
+        .map(Transaction::getTransactionId)
         .collect(Collectors.toList());
   }
 
-  public double sumAllRelatedTransactions(Long transaction_id) {
-    Transaction transaction = transactions.get(transaction_id);
-
-    if (transaction == null) {
-      throw new NoSuchElementException(
-          String.format("Transaction with id %d not found", transaction_id));
-    }
-
+  public double sumAllRelatedTransactions(Long transactionId) {
+    Transaction transaction =
+        getTransactionOrThrow(
+            transactionId, String.format("Transaction with id %d not found", transactionId));
     return sumAllRelatedTransactionsHelper(transaction);
   }
 
@@ -71,5 +64,13 @@ public class TransactionService {
     }
 
     return transactionSum;
+  }
+
+  private Transaction getTransactionOrThrow(Long transactionId, String errorMessage) {
+    Transaction transaction = transactions.get(transactionId);
+    if (transaction == null) {
+      throw new NoSuchElementException(errorMessage);
+    }
+    return transaction;
   }
 }
