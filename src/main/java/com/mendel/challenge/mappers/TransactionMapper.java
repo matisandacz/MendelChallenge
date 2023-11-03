@@ -6,7 +6,7 @@ package com.mendel.challenge.mappers;
 
 import com.mendel.challenge.domain.Transaction;
 import com.mendel.challenge.models.TransactionDto;
-import java.util.ArrayList;
+import java.util.HashSet;
 
 public class TransactionMapper {
 
@@ -25,7 +25,7 @@ public class TransactionMapper {
         .transactionId(transactionId)
         .amount(transactionDto.getAmount())
         .type(transactionDto.getType())
-        .childrenTransactions(new ArrayList<>())
+        .childrenTransactions(new HashSet<>())
         .parentId(transactionDto.getParentId())
         .build();
   }

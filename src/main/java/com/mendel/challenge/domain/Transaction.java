@@ -7,7 +7,7 @@ package com.mendel.challenge.domain;
 import jakarta.annotation.Nullable;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
-import java.util.List;
+import java.util.Set;
 import lombok.Builder;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -22,12 +22,16 @@ public class Transaction {
       Double amount,
       String type,
       @Nullable Long parentId,
-      List<Transaction> childrenTransactions) {
+      Set<Transaction> childrenTransactions) {
     this.transactionId = transactionId;
     this.amount = amount;
     this.type = type;
     this.parentId = parentId;
     this.childrenTransactions = childrenTransactions;
+  }
+
+  public void addChildTransaction(Transaction transaction) {
+    childrenTransactions.add(transaction);
   }
 
   @NotNull private final Long transactionId;
@@ -38,5 +42,5 @@ public class Transaction {
 
   @Nullable private final Long parentId;
 
-  @NotNull private final List<Transaction> childrenTransactions;
+  @NotNull private final Set<Transaction> childrenTransactions;
 }

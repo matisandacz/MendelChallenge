@@ -29,7 +29,7 @@ public class TransactionService {
               transaction.getParentId(),
               String.format("Parent transaction with id %d not found", transaction.getParentId()));
       // If this transaction is related to a parent, add it as a child.
-      parentTransaction.getChildrenTransactions().add(transaction);
+      parentTransaction.addChildTransaction(transaction);
     }
 
     // Save the transaction
