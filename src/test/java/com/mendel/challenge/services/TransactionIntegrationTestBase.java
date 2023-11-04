@@ -45,7 +45,6 @@ public class TransactionIntegrationTestBase {
   }
 
   protected MvcResult getTransactionByType(String type) throws Exception {
-    // Save the transaction
     return mockMvc
         .perform(
             MockMvcRequestBuilders.get(GET_TRANSACTIONS_BY_TYPE_URL + type)
@@ -55,7 +54,6 @@ public class TransactionIntegrationTestBase {
   }
 
   protected MvcResult sumTransactions(Long transactionId) throws Exception {
-    // Save the transaction
     return mockMvc
         .perform(
             MockMvcRequestBuilders.get(SUM_TRANSACTIONS_URL + transactionId)
