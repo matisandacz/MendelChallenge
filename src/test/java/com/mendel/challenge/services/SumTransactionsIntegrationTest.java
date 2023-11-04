@@ -12,7 +12,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.http.HttpStatus;
 import org.springframework.test.web.servlet.MvcResult;
 
-public class SumTransactionsIntegrationTest extends CreateTransactionsIntegrationTest {
+public class SumTransactionsIntegrationTest extends TransactionIntegrationTestBase {
 
   @Test
   void whenSumTransactionsOfNonExistentIdThenError() throws Exception {
