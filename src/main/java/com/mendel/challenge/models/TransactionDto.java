@@ -4,6 +4,7 @@
  */
 package com.mendel.challenge.models;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.annotation.Nullable;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
@@ -28,5 +29,6 @@ public class TransactionDto {
   @NotEmpty(message = "type can't be blank")
   private final String type;
 
+  @JsonProperty("parent_id")
   @Nullable private final Long parentId;
 }
